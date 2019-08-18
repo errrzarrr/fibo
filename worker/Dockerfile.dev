@@ -1,3 +1,4 @@
+# to be used with nodemon for development purposes
 FROM node:alpine
 
 WORKDIR '/app'
@@ -7,5 +8,4 @@ COPY ./package-lock.json ./
 RUN npm install
 
 COPY . .
-# to be used with nodemon for development purposes
 CMD [ "npm", "run", "dev" ]

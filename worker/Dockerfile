@@ -1,4 +1,4 @@
-# to be used with nodemon for development purposes
+# WARNING: For production purposes
 FROM node:alpine
 
 WORKDIR '/app'
@@ -8,4 +8,4 @@ COPY ./package-lock.json ./
 RUN npm install
 
 COPY . .
-CMD [ "npm", "run", "dev" ]
+CMD [ "npm", "run", "start" ]
