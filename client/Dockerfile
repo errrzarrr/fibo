@@ -7,12 +7,12 @@ RUN npm install
 COPY . .
 RUN npm run build
 
-# 2nd stage, the backend stage
+# 2nd stage
 # move frontend static content from previous stage
 # to where nginx serves it from (/usr/share/nginx/html)
 # nginx gets started automatically by container
 FROM nginx
-# EXPOSE is a 'sugestion', communications between devs
+# EXPOSE is a 'sugestion', communication between devs
 # As for AWS EB, it undestands it must map it outwards
 EXPOSE 3000
 COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
