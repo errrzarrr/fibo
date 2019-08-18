@@ -1,0 +1,53 @@
+version: '3'
+services:
+  postgres:
+    image: "postgres:latest"
+  redis:
+    image: "redis:latest"
+  client:
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./client
+    volumes:
+      - /app/node_modules
+      - ./client:/app
+  worker:
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./worker
+    volumes:
+      - /app/node_modules
+      - ./worker:/app
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+  api:  # named 'api' because NGINX's default.conf won't like 'server'
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./server
+    volumes:
+      # except for node_modules, 
+      # make a reference of computer's /server into container's /app
+      - /app/node_modules
+      - ./server:/app
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - PG_USER=postgres
+      - PG_HOST=postgres
+      - PG_DATABASE=postgres
+      - PG_PASS=postgres_password
+      - PG_PORT=5432
+    depends_on: 
+      - postgres  
+  nginx:
+    # always should be up, since it's our front face @ backend
+    restart: always
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./nginx
+    ports: 
+      - '8000:80'
+    volumes:
+      - /app/node_modules
+      - ./client:/app
