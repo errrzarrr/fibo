@@ -13,7 +13,7 @@ RUN npm run build
 # nginx gets started automatically by container
 FROM nginx
 # EXPOSE is a 'sugestion', communications between devs
-# As for AWS EB, it undestands it must map it to outwards
+# As for AWS EB, it undestands it must map it outwards
 EXPOSE 3000
 COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
-COPY --from=frontEndBuilder /app/bluid /usr/share/nginx/html
+COPY --from=frontEndBuilder /app/build /usr/share/nginx/html
