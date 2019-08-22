@@ -15,7 +15,7 @@ before_install:
 
 # Tell Travis how to run our test suite
 script: 
-  - docker run -e CI=true errrzarrr/fibo-test npm test 
+  - docker run -e CI=true errrzarrr/fibo-client-test npm test 
 
 # build PRODUCTION versions of each module
 after_success:
