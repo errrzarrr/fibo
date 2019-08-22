@@ -11,7 +11,7 @@ before_install:
   # Provide a tag name because we don't have an easy way to grab image id.
   # Given name won't matter too much because it's just an internal name
   # ---however, meaninful naming is a best-practice	
-  - docker build -t errrzarrr/fibo-client-test -f Dockerfile.dev ./client
+  - docker build -t errrzarrr/fibo-client-test -f ./client/Dockerfile.dev ./client
 
 # Tell Travis how to run our test suite
 script: 
