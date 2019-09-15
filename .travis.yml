@@ -29,3 +29,24 @@ after_success:
   - docker push errrzarrr/fibo-nginx 
   - docker push errrzarrr/fibo-server
   - docker push errrzarrr/fibo-worker
+deploy:
+  # VPS or cloud provider, like DO, AWS or heroku 
+  provider: elasticbeanstalk 
+  region: "us-east-2"
+  # AWS' EB instance (application) name
+  app: "fibo" 
+  # environment name in that application
+  env: "Fibo-env" 
+  # S3 bucket created automatically for you for that region
+  bucket_name: "$AWS_S3_BUCKET" 
+  # same as app name, usually
+  bucket_path: "fibo" 
+  on:
+    # deploy only features that were merged into 'master' branch
+    branch: master
+  access_key_id: 
+    secure: "$AWS_PUBLIC_KEY"
+  # WARNING: AWS will only show you it once and no more
+  secret_access_key:
+    secure: "$AWS_PRIVATE_KEY"
+   

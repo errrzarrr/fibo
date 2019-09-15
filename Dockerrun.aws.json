@@ -1,0 +1,30 @@
+{
+	"AWSEBDockerrunVersion":2
+	,"containerDefinitions":[
+		{
+			"name": "client"
+			,"image": "errrzarrr/fibo-client"
+			,"hostname": "client"
+			,"essential": false 
+		},{
+			"name": "server"
+			,"image": "errrzarrr/fibo-server"
+			,"hostname": "api"
+			,"essential": false
+		},{
+			"name": "worker"
+			,"image": "errrzarrr/fibo-worker"
+            ,"hostname": "worker" 
+			,"essential": false
+		},{
+			"name": "nginx"
+			,"image": "errrzarrr/fibo-nginx"
+			,"essential": true
+            ,"portMappins": [{
+                "hostPort": 8000
+                ,"containerPort": 80
+            }]
+            ,"links": ["client", "server"] 
+		}
+	]
+}
