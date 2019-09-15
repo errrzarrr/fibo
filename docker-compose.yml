@@ -6,14 +6,14 @@ services:
     image: "redis:latest"
   client:
     build:
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile
       context: ./client
     volumes:
       - /app/node_modules
       - ./client:/app
   worker:
     build:
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile
       context: ./worker
     volumes:
       - /app/node_modules
@@ -23,7 +23,7 @@ services:
       - REDIS_PORT=6379
   api:  # named 'api' because NGINX's default.conf won't like 'server'
     build:
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile
       context: ./server
     volumes:
       # except for node_modules, 
@@ -44,7 +44,7 @@ services:
     # always should be up, since it's our front face @ backend
     restart: always
     build:
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile
       context: ./nginx
     ports: 
       - '8000:80'
