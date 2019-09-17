@@ -1,6 +1,6 @@
 # WARNING: For production purposes
 FROM node:alpine as frontEndBuilder
-WORKDIR '/app'
+WORKDIR /app
 COPY ./package.json ./
 COPY ./package-lock.json ./ 
 RUN npm install

@@ -1,7 +1,7 @@
 # WARNING: For production purposes
 FROM node:alpine
 
-WORKDIR '/app'
+WORKDIR /app
 
 COPY ./package.json ./
 COPY ./package-lock.json ./
